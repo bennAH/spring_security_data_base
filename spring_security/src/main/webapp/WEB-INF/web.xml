@@ -42,6 +42,7 @@
           </filter-class>
 	</filter>
  
+ 	<!-- intercept requests and perform some pre-processing -->
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
