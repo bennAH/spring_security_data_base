@@ -2,13 +2,13 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Home</title>
+	<title><%= request.getParameter("title") %></title>
+	
 </head>
 <body>
 <h1>
-	Hello ${name}
+	Spring Security Base App 1!
 </h1>
 
-<P>  The time on the server is ${serverTime}. </P>
 </body>
 </html>
