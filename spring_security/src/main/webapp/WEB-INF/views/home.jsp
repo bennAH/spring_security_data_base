@@ -13,7 +13,8 @@
 <h2>
 	${name} Logged In. 
 </h2>
-<a href="<c:url value="j_spring_security_logout" />" > Logout</a>
+<c:url value="/logout" var="logoutURL" />
+<a href="${logoutURL}">Logout</a>
 
 </body>
 </html>

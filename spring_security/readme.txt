@@ -34,3 +34,34 @@ Basic Role Config
 	<beans:bean class="org.springframework.security.access.vote.RoleVoter" id="roleVoter" />
 	<beans:bean class="org.springframework.security.access.vote.AuthenticatedVoter" id="authenticatedVoter" />
 --------------------
+
+Logout URL config
+
+<http auto-config="true" use-expressions="true">
+		<intercept-url pattern="/login*" access="permitAll" />
+		<intercept-url pattern="/*" access="hasRole('ROLE_USER')" />
+		
+		<form-login login-page="/login" />
+		
+		<logout invalidate-session="true"
+			logout-success-url="/"
+			logout-url="/logout" />
+	</http>
+--------------------
+
+Logout success handler config
+
+<http auto-config="true" use-expressions="true">
+		<intercept-url pattern="/login*" access="permitAll" />
+		<intercept-url pattern="/*" access="hasRole('ROLE_USER')" />
+		
+		<form-login login-page="/login" />
+		
+		<logout invalidate-session="true"
+			logout-url="/logout"
+			success-handler-ref="logoutSuccessHandler"/>
+	</http>
+	
+	<beans:bean id="logoutSuccessHandler" class="com.base.spring.security.LogoutSuccessHandler" >
+    	<beans:constructor-arg value="/" />
+	</beans:bean>
