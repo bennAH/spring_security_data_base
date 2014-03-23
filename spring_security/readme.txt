@@ -51,11 +51,13 @@ Logout URL config
 
 Logout success handler config
 
-<http auto-config="true" use-expressions="true">
+	<http auto-config="true" use-expressions="true">
 		<intercept-url pattern="/login*" access="permitAll" />
 		<intercept-url pattern="/*" access="hasRole('ROLE_USER')" />
 		
 		<form-login login-page="/login" />
+		
+		<remember-me key="spring_sec_base" />
 		
 		<logout invalidate-session="true"
 			logout-url="/logout"
@@ -65,3 +67,24 @@ Logout success handler config
 	<beans:bean id="logoutSuccessHandler" class="com.base.spring.security.LogoutSuccessHandler" >
     	<beans:constructor-arg value="/" />
 	</beans:bean>
+		
+	<!-- intercepts requests -->
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider>
+			<user-service>
+				<user authorities="ROLE_USER" name="guest" password="guest" />
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+	
+	
+--------------------
+
+Authentication manager config
+
+	<!-- intercepts requests -->
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="userAuthProvider" />
+	</authentication-manager>
+	
+	<beans:bean id="userAuthProvider" class="com.base.spring.security.UserAuthProvider" />

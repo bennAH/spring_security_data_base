@@ -14,24 +14,19 @@
 		
 		<form-login login-page="/login" />
 		
-		<remember-me key="spring_sec_base" />
-		
 		<logout invalidate-session="true"
 			logout-url="/logout"
 			success-handler-ref="logoutSuccessHandler"/>
 	</http>
 	
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="userAuthProvider" />
+	</authentication-manager>
+	
 	<beans:bean id="logoutSuccessHandler" class="com.base.spring.security.LogoutSuccessHandler" >
     	<beans:constructor-arg value="/" />
 	</beans:bean>
-		
-	<!-- intercepts requests -->
-	<authentication-manager alias="authenticationManager">
-		<authentication-provider>
-			<user-service>
-				<user authorities="ROLE_USER" name="guest" password="guest" />
-			</user-service>
-		</authentication-provider>
-	</authentication-manager>
+	
+	<beans:bean id="userAuthProvider" class="com.base.spring.security.UserAuthProvider" />
 	
 </beans:beans>
