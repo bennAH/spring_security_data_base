@@ -21,7 +21,7 @@ public class UserAuthProvider implements UserDetailsService {
 		User user = null;
 		
 		if (username.equals("guest")) {
-			user = new User("guest", "guest", Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
+			user = new User("guest", "d80fb843776680616ec84eb3134d591d99cfb4d532e33fd525bc93137c3dd256c0bdd4f717fc4443", Arrays.asList(new SimpleGrantedAuthority("ROLE_USER")));
 		} else {
 			throw new UsernameNotFoundException(username);
 		}

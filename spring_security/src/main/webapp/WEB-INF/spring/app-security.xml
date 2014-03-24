@@ -19,8 +19,15 @@
 			success-handler-ref="logoutSuccessHandler"/>
 	</http>
 	
+	<beans:bean id="passwordEncoder" 
+	    class="org.springframework.security.crypto.password.StandardPasswordEncoder">
+	    <beans:constructor-arg value="secret" />
+	</beans:bean>
+	
 	<authentication-manager alias="authenticationManager">
-		<authentication-provider user-service-ref="userAuthProvider" />
+		<authentication-provider user-service-ref="userAuthProvider">
+			<password-encoder ref="passwordEncoder" />
+		</authentication-provider>
 	</authentication-manager>
 	
 	<beans:bean id="logoutSuccessHandler" class="com.base.spring.security.LogoutSuccessHandler" >
